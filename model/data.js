@@ -19,7 +19,7 @@ const insert_data = function(data) {
             email: data.email,
             password: data.pass,
             phone: data.phone,
-            adress: data.adress
+            address: data.address
         }).then(
             function(data, header, status) {
                 console.log("Data Saved!");
