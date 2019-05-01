@@ -21,10 +21,18 @@ module.exports = function(app) {
         res.redirect('/');
     })
 
-    app.post('/user/add', function(req, res) {
+    app.post('/user/login', function(req, res) {
         const email = req.body.email;
         const pass = req.body.pass;
-        // Valided data
+        // Valided data && send the rest of it
+        data.check_data(req.body, function(callback) {
+            if (callback != '') {
+                // Go to profile and send the data
+                res.end(callback)
+            } else {
+                res.redirect('/');
+            }
+        });
     })
 
 }
