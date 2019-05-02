@@ -7,7 +7,16 @@
     </head>
     <body>
         <div class="container">
-            
+            <% emails.forEach(function(emails) { %>
+                <li>
+                    <h4>Name: <%= emails.value.name %> </h4>
+                    <p>Email: <%= emails.value.email %></p>
+                    <form class="" action="/customer/delete/<%= cust.key %>" method="post">
+                        <input type="hidden" name="rev" value="<%= cust.doc._rev %>">
+                        <input type="submit" name="remove" value="X">
+                    </form>
+                </li>
+            <% }) %>
         </div>
     </body>
     <script src="js/bootstrap.js" charset="utf-8"></script>
