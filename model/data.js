@@ -35,24 +35,51 @@ var insert_data = function(data) {
 var check_data = function(data, callback) {
     const email = data.email;
     const pass = data.pass;
+    //console.log("Enterd Email = " + email);
+    //console.log("Enterd Pass = " + pass);
     couch.get(dbName, viewUrl + "?key=\"" + email + "\"").then(
         function(data, headers, status) {
             //data.data.rows[0].key     **email**
+            //console.log("email form database " + data.data.rows[0].key);
             //data.data.rows[0].value   **pass**
-            if (email == data.data.rows[0].key
+            //console.log("Pass from database " + data.data.rows[0].value);
+            if (data.data.rows[0]
+                && email == data.data.rows[0].key
                 && pass == data.data.rows[0].value) {
-                    console.log("Correct");
+                    var id = data.data.rows[0].id;
+                    couch.get(dbName, id).then(
+                        function(data, header, status) {
+                            callback(id, data.data);
+                        },
+                        function(err) {
+                            console.log("Error: getting data by id");
+                        }
+                    )
             } else {
-                console.log("Wrong");
+                console.log("Error email or pass");
+                callback(false);
             }
         },
         function(err) {
-            console.log("Error");
+            console.log("Error: email and pass");
+        }
+    )
+}
+
+var delete_data = function(id, rev, callback) {
+    console.log("_rev form data: " + rev);
+    couch.del(dbName, id, rev).then(
+        function(data, header, status) {
+            callback(true);
+        },
+        function(err) {
+            callback(false);
         }
     )
 }
 
 module.exports = {
     insert_data: insert_data,
-    check_data: check_data
+    check_data: check_data,
+    delete_data: delete_data
 }
