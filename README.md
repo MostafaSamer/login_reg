@@ -29,4 +29,6 @@
 <ul>
     <li>fix boostrap static files in profile</li>
     <li>Add update</li>
+    <li>hashing password</li>
+    <li>Add sections by email and pass</li>
 </ul>
