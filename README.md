@@ -24,3 +24,9 @@
     </li>
     <li>view: _design/all_data/_view/new-view</li>
 </ul>
+
+<h4>Still to code:</h4>
+<ul>
+    <li>fix boostrap static files in profile</li>
+    <li>Add update</li>
+</ul>
