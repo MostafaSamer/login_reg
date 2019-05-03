@@ -56,11 +56,11 @@ module.exports = function(app) {
                     address: callback.address
                 })*/
                 res.redirect('/user/profile/' + id
-                                       + "&&" + callback._rev
-                                       + "&&" + callback.name
-                                       + "&&" + callback.email
-                                       + "&&" + callback.phone
-                                       + "&&" + callback.address);
+                                      + "&&" + callback._rev
+                                      + "&&" + callback.name
+                                      + "&&" + callback.email
+                                      + "&&" + callback.phone
+                                      + "&&" + callback.address);
             } else {
                 res.redirect('/');
             }

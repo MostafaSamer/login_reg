@@ -27,8 +27,8 @@
 
 <h4>Still to code:</h4>
 <ul>
-    <li>fix boostrap static files in profile</li>
     <li>Add update</li>
-    <li>hashing password</li>
     <li>Add sections by email and pass</li>
+    <li>Add photo</li>
+    <li>Add Admin</li>
 </ul>

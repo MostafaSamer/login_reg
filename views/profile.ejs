@@ -2,12 +2,14 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Register</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Profile</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
-            <form class="" action="/user/delete/<%= id %>&&<%= rev %>" method="post">
+            <h3 class="text-center">Profile</h3>
+            <br>
+            <form class="" action="" method="post">
                 <div class="form-group">
                     <input type="hidden" name="id" value="<%= id %>"> <!-- to delete it -->
                     <input type="hidden" name="rev" value="<%= rev %>"> <!-- to delete it -->
@@ -26,5 +28,5 @@
             </form>
         </div>
     </body>
-    <script src="js/bootstrap.js" charset="utf-8"></script>
+    <script src="/js/bootstrap.js" charset="utf-8"></script>
 </html>

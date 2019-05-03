@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const nodeCouchdb = require('node-couchdb');
 const path = require('path');
 
@@ -18,7 +19,7 @@ var insert_data = function(data) {
         couch.insert(dbName, {
             name: data.name,
             email: data.email,
-            pass: data.pass,
+            pass: md5(data.pass),
             phone: data.phone,
             address: data.address
         }).then(
@@ -34,7 +35,7 @@ var insert_data = function(data) {
 
 var check_data = function(data, callback) {
     const email = data.email;
-    const pass = data.pass;
+    const pass = md5(data.pass);
     //console.log("Enterd Email = " + email);
     //console.log("Enterd Pass = " + pass);
     couch.get(dbName, viewUrl + "?key=\"" + email + "\"").then(
