@@ -11,15 +11,28 @@ module.exports = function(app) {
     })
 
     app.get('/user/profile/:id&&:rev&&:name&&:email&&:phone&&:address', function(req, res) {
-        console.log(req.params.rev);
-        res.render('profile', {
-            id: req.params.id,
-            rev: req.params.rev,
-            name: req.params.name,
-            email: req.params.email,
-            phone: req.params.phone,
-            address: req.params.address
-        });
+        sess = req.session;
+        if (sess.email && sess.pass) {
+            console.log(req.params.rev);
+            res.render('profile', {
+                id: req.params.id,
+                rev: req.params.rev,
+                name: req.params.name,
+                email: req.params.email,
+                phone: req.params.phone,
+                address: req.params.address
+            });
+        }
+    })
+
+    app.post('/logout', function(req, res) {
+        req.session.destroy(function(err) {
+            if (err) {
+                console.log("Error in destroying the session");
+            }
+            console.log("Session destroyed!");
+            res.redirect('/');
+        })
     })
 
     app.post('/user/delete', function(req, res) {
@@ -45,6 +58,9 @@ module.exports = function(app) {
     app.post('/user/login', function(req, res) {
         const email = req.body.email;
         const pass = req.body.pass;
+        sess = req.session
+        sess.email = email;
+        sess.pass = pass;
         // Valided data && send the rest of it
         data.check_data(req.body, function(id, callback) {
             if (callback) {
@@ -65,6 +81,16 @@ module.exports = function(app) {
                 res.redirect('/');
             }
         });
+    })
+
+    app.get('*', function(req, res) {
+        req.session.destroy(function(err) {
+            if (err) {
+                console.log("Error in destroying the session");
+            }
+            console.log("Session destroyed!");
+            res.redirect('/');
+        })
     })
 
 }
