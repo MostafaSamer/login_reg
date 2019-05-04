@@ -18,15 +18,16 @@ module.exports = function(app) {
     // render the profile.ejs
     // check the session for logining
     // get the data from the url
-    app.get('/user/profile/:id&&:rev&&:name&&:email&&:phone&&:address', function(req, res) {
+    app.get('/user/profile/:id&&:rev&&:name&&:email&&:pass&&:phone&&:address', function(req, res) {
         sess = req.session;
+
         if (sess.email && sess.pass) {
-            console.log(req.params.rev);
             res.render('profile', {
                 id: req.params.id,
                 rev: req.params.rev,
                 name: req.params.name,
                 email: req.params.email,
+                pass: req.params.pass,
                 phone: req.params.phone,
                 address: req.params.address
             });
@@ -69,6 +70,11 @@ module.exports = function(app) {
         res.redirect('/');
     })
 
+    app.post('/user/update', function(req, res) {
+        data.update_user(req.body);
+        res.redirect("/logout");
+    })
+
     // handling the login
     // get the data from login.ejs
     // and make a session with it
@@ -88,6 +94,7 @@ module.exports = function(app) {
                                       + "&&" + callback._rev
                                       + "&&" + callback.name
                                       + "&&" + callback.email
+                                      + "&&" + callback.pass
                                       + "&&" + callback.phone
                                       + "&&" + callback.address);
             } else {

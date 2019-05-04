@@ -83,8 +83,31 @@ var delete_data = function(id, rev, callback) {
     )
 }
 
+// to update a data of user
+// getting an id & rev
+// getting the rest of the data in one var (data)
+var update_user = function(data) {
+    couch.update(dbName, {
+        _id: data.id,
+        _rev: data.rev,
+        name: data.name,
+        email: data.email,
+        pass: data.pass,
+        phone: data.phone,
+        address: data.address
+    }).then(
+        function(data, headers, status) {
+
+        },
+        function(err) {
+            console.log("Error in updating the data of: " + id);
+        }
+    )
+}
+
 module.exports = {
     insert_data: insert_data,
     check_data: check_data,
-    delete_data: delete_data
+    delete_data: delete_data,
+    update_user: update_user
 }

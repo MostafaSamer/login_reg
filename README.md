@@ -7,6 +7,8 @@
     <li>ejs</li>
     <li>node-couchdb</li>
     <li>path</li>
+    <li>md5</li>
+    <li>express-session</li>
 </ul>
 <h4>Database info</h4>
 <ul>
@@ -27,7 +29,13 @@
 
 <h4>Still to code:</h4>
 <ul>
-    <li>Add update..</li>
+    <li>Add profile</li> (done)
+    <li>Delete button</li> (done)
+    <li>fix bootstrap static files</li> (done)
+    <li>hashing the passwords</li> (done)
+    <li>use sessions</li> (problem)
+    <li>Add logOut</li> (done)
+    <li>Add update..</li> (done)
     <li>Add photo...</li>
     <li>Add Admin...</li>
     <li>Start using session in thrown data...</li>
