@@ -22,8 +22,8 @@ module.exports = function(app) {
         });
     })
 
-    app.post('/user/delete/:id&&:rev', function(req, res) {
-        data.delete_data(req.params.id, req.params.rev, function(callback) {
+    app.post('/user/delete', function(req, res) {
+        data.delete_data(req.body.id, req.body.rev, function(callback) {
             if (callback) {
                 console.log("Deleted!");
                 res.redirect('/');
