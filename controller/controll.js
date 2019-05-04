@@ -2,14 +2,22 @@ const data = require('../model/data');
 
 module.exports = function(app) {
 
+    /////////////////////
+    // Getter of the url
+    /////////////////////
+    // render the home(login.ejs) when he try to enter the root
     app.get('/', function(req, res) {
         res.render('login');
     })
 
+    // render the (register.ejs)
     app.get('/reg', function(req, res) {
         res.render('register');
     })
 
+    // render the profile.ejs
+    // check the session for logining
+    // get the data from the url
     app.get('/user/profile/:id&&:rev&&:name&&:email&&:phone&&:address', function(req, res) {
         sess = req.session;
         if (sess.email && sess.pass) {
@@ -25,6 +33,9 @@ module.exports = function(app) {
         }
     })
 
+    // handling the logout req,
+    // by destroing the sessions,
+    // then redirect it to the root "/"
     app.post('/logout', function(req, res) {
         req.session.destroy(function(err) {
             if (err) {
@@ -35,6 +46,7 @@ module.exports = function(app) {
         })
     })
 
+    // handling the delete get the id & rev from the form and send to data.js
     app.post('/user/delete', function(req, res) {
         data.delete_data(req.body.id, req.body.rev, function(callback) {
             if (callback) {
@@ -44,6 +56,8 @@ module.exports = function(app) {
         })
     })
 
+    // handling the add of new user get all needed data from register.ejs
+    // and valid it then send it to data.js
     app.post('/user/add', function(req, res) {
         const name = req.body.name;
         const email = req.body.email;
@@ -55,6 +69,12 @@ module.exports = function(app) {
         res.redirect('/');
     })
 
+    // handling the login
+    // get the data from login.ejs
+    // and make a session with it
+    // then send it to the data.js
+    // at last get the data from the callback() and redirect it to /user/profile
+    // if there is no callback() redirect to the root "/"
     app.post('/user/login', function(req, res) {
         const email = req.body.email;
         const pass = req.body.pass;
@@ -64,13 +84,6 @@ module.exports = function(app) {
         // Valided data && send the rest of it
         data.check_data(req.body, function(id, callback) {
             if (callback) {
-                // Go to profile and send the data
-                /*res.render('profile', {
-                    name: callback.name,
-                    email: callback.email,
-                    phone: callback.phone,
-                    address: callback.address
-                })*/
                 res.redirect('/user/profile/' + id
                                       + "&&" + callback._rev
                                       + "&&" + callback.name
@@ -83,6 +96,8 @@ module.exports = function(app) {
         });
     })
 
+    // handling wrong request from the user
+    // to enter a not valid url, redirect him to the root "/"
     app.get('*', function(req, res) {
         req.session.destroy(function(err) {
             if (err) {

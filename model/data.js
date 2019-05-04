@@ -12,6 +12,8 @@ const couch = new nodeCouchdb({
 const dbName = 'login_reg';
 const viewUrl = '_design/view-all/_view/all-index';
 
+// to insert new user
+// data{name: "", .....}
 var insert_data = function(data) {
     //console.log("Data: " + data.name);
     couch.uniqid().then(function(ids) {
@@ -33,17 +35,16 @@ var insert_data = function(data) {
     })
 }
 
+// check if the user is exits
+// if though return his data in callback()
+// if not return false in callback()
 var check_data = function(data, callback) {
     const email = data.email;
     const pass = md5(data.pass);
-    //console.log("Enterd Email = " + email);
-    //console.log("Enterd Pass = " + pass);
     couch.get(dbName, viewUrl + "?key=\"" + email + "\"").then(
         function(data, headers, status) {
             //data.data.rows[0].key     **email**
-            //console.log("email form database " + data.data.rows[0].key);
             //data.data.rows[0].value   **pass**
-            //console.log("Pass from database " + data.data.rows[0].value);
             if (data.data.rows[0]
                 && email == data.data.rows[0].key
                 && pass == data.data.rows[0].value) {
@@ -67,6 +68,9 @@ var check_data = function(data, callback) {
     )
 }
 
+// to delete a data of a user
+// getting an id & rev
+// if it deleted return true, false otherwise
 var delete_data = function(id, rev, callback) {
     console.log("_rev form data: " + rev);
     couch.del(dbName, id, rev).then(

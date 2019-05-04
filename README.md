@@ -27,7 +27,8 @@
 
 <h4>Still to code:</h4>
 <ul>
-    <li>Add update</li>
-    <li>Add photo</li>
-    <li>Add Admin</li>
+    <li>Add update..</li>
+    <li>Add photo...</li>
+    <li>Add Admin...</li>
+    <li>Start using session in thrown data...</li>
 </ul>
