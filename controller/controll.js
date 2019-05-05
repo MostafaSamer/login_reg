@@ -70,6 +70,8 @@ module.exports = function(app) {
         res.redirect('/');
     })
 
+    // handling updating the data
+    // reciving data includeing id & rev
     app.post('/user/update', function(req, res) {
         data.update_user(req.body);
         res.redirect("/logout");
@@ -101,18 +103,6 @@ module.exports = function(app) {
                 res.redirect('/');
             }
         });
-    })
-
-    // handling wrong request from the user
-    // to enter a not valid url, redirect him to the root "/"
-    app.get('*', function(req, res) {
-        req.session.destroy(function(err) {
-            if (err) {
-                console.log("Error in destroying the session");
-            }
-            console.log("Session destroyed!");
-            res.redirect('/');
-        })
     })
 
 }

@@ -33,7 +33,8 @@
     <li>Delete button</li> (done)
     <li>fix bootstrap static files</li> (done)
     <li>hashing the passwords</li> (done)
-    <li>use sessions</li> (problem)
+    <li>use sessions</li> (done)
+    <li>fix CANNOT GET /</li>
     <li>Add logOut</li> (done)
     <li>Add update..</li> (done)
     <li>Add photo...</li>
